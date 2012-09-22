@@ -1,0 +1,14 @@
+# humanstxt.org
+# The humans responsible & technology colophon
+
+# TEAM
+
+  Dan LaMotte -- Developer -- @dlamotte_
+
+# THANKS
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3
+    jQuery, Modernizer, Underscore.js, Backbone.js
+    Django, PostgreSQL

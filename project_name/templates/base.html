@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  {% load compress %}
+  {% load staticfiles %}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>{% block title %}{% endblock %}{{ settings.PROJECT_NAME_TITLE }}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="author" href="/humans.txt">
+
+  {% compress css %}
+    <link rel="stylesheet" type="text/less" href="{% static "less/main.less" %}">
+  {% endcompress %}
+  {% compress css %}
+    {% block extracss %}{% endblock %}
+  {% endcompress %}
+
+  {# css sticky footer requires following for IE #}
+  <!--[if !IE 7]>
+  <style type="text/css">
+    .sticky-wrap { display:table; height:100%; }
+  </style>
+  <![endif]-->
+
+  {% compress js %}
+    <script src="{% static "js/modernizr.js" %}"></script>
+  {% endcompress %}
+</head>
+<body>
+  <div class="sticky-wrap">
+    <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+
+          <a class="brand" href="/">{{ settings.PROJECT_NAME }}</a>
+
+          <div class="nav-collapse">
+            <ul class="nav pull-right">
+              {% if user.is_authenticated %}
+                <li><a>Welcome {{ user.username }}</a></li>
+                <li class="divider-vertical"></li>
+                {% if user.is_staff %}
+                  <li><a href="/admin/">Admin</a></li>
+                {% endif %}
+                <li><a href="{% url django.contrib.auth.views.logout %}{% if settings.LOGOUT_REDIRECT_TO_CURRENT_PAGE %}?next={{ settings.LOGOUT_URL }}{% endif %}">Logout</a></li>
+              {% else %}
+                <li><a href="{% url django.contrib.auth.views.login %}{% if settings.LOGIN_REDIRECT_TO_CURRENT_PAGE %}?next={{ request.path }}{% endif %}">Login</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sticky-main container">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+  <div class="sticky-footer footer">
+    <div class="container">
+      <div class="row">
+        <div class="span4">&copy; {{ settings.PROJECT_NAME }} {% now "Y" %}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hidden">
+    <img src="{% static "img/loading_small.gif" %}">
+    <img src="{% static "img/loading_large.gif" %}">
+  </div>
+
+  {% compress js %}
+    <script>
+      var APP = {};
+      var IMG = {
+        loading_small: '{% static "img/loading_small.gif" %}',
+        loading_large: '{% static "img/loading_large.gif" %}'
+      };
+    </script>
+    <script src="{% static "js/json2.js" %}"></script>
+    <script src="{% static "js/es5-shim.js" %}"></script>
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/underscore.js" %}"></script>
+    <script src="{% static "js/underscore.string.js" %}"></script>
+    <script src="{% static "js/backbone.js" %}"></script>
+    <script src="{% static "js/backbone-tastypie.js" %}"></script>
+    <script src="{% static "js/backbone-relational.js" %}"></script>
+    <script src="{% static "js/laconic.js" %}"></script>
+    <script src="{% static "js/moment.js" %}"></script>
+    <script src="{% static "js/rivets.js" %}"></script>
+    <script src="{% static "js/bootstrap.js" %}"></script>
+    <script src="{% static "js/main.js" %}"></script>
+    <script>
+      _.mixin(_.str.exports());
+      _.extend(Backbone.Tastypie.apiKey, {
+        'username': '{{ user.username }}',
+        'key': '{{ user.api_key.key }}'
+      });
+      rivets.configure({
+        adapter: {
+          subscribe: function(obj, keypath, callback) {
+            callback.wrapped = function(m, v) { callback(v) };
+            obj.on('change:' + keypath, callback.wrapped);
+          },
+          unsubscribe: function(obj, keypath, callback) {
+            obj.off('change:' + keypath, callback.wrapped);
+          },
+          read: function(obj, keypath) {
+            return obj.get(keypath);
+          },
+          publish: function(obj, keypath, value) {
+            obj.set(keypath, value);
+          }
+        },
+        formatters: {
+          date: function(value) {
+            return moment(value).format('YYYY-MM-DD');
+          },
+          datetime: function(value) {
+            return moment(value).format('YYYY-MM-DD HH:mm:ss');
+          },
+          money: function(value) {
+            return '$' + value;
+          }
+        }
+      });
+    </script>
+  {% endcompress %}
+  {% compress js %}
+    {% block extrajs %}{% endblock %}
+  {% endcompress %}
+  {% block extrajstemplates %}{% endblock %}
+
+  {% if settings.GOOGLE_ANALYTICS_KEY %}
+    <script>
+      var _gaq=[['_setAccount','{{ settings.GOOGLE_ANALYTICS_KEY }}'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+  {% endif %}
+</body>
+</html>
