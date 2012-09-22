@@ -14,8 +14,10 @@ Complete with:
 
 To use:
 
-    django-admin.py startproject --template=path/to/djtemplate myprojectname
+    django-admin.py startproject --template=https://github.com/dlamotte/djtemplate/tarball/master myprojectname
     cd myprojectname
+    mv dlamotte-*/* .
+    rmdir dlamotte-*
     virtualenv env
     source env/bin/activate
     pip install -e .
