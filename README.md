@@ -25,5 +25,7 @@ To use:
     echo 'from myprojectname.conf.settings.dev import *' > settings_local.py
     echo '/env/\nsettings_local.py' > .gitignore
     git init
+    chmod 755 ./manage.py
+    chmod 755 ./setup.py
     ./manage.py syncdb
     ./manage.py runserver
