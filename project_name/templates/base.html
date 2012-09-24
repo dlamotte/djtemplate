@@ -89,7 +89,6 @@
         loading_small: '{% static "img/loading_small.gif" %}',
         loading_large: '{% static "img/loading_large.gif" %}'
       };
-      var USER = {{ user_json|safe }};
     </script>
     <script src="{% static "js/json2.js" %}"></script>
     <script src="{% static "js/es5-shim.js" %}"></script>
@@ -106,10 +105,6 @@
     <script src="{% static "js/main.js" %}"></script>
     <script>
       _.mixin(_.str.exports());
-      _.extend(Backbone.Tastypie.apiKey, {
-        'username': '{{ user.username }}',
-        'key': '{{ user.api_key.key }}'
-      });
       rivets.configure({
         adapter: {
           subscribe: function(obj, keypath, callback) {
@@ -140,10 +135,15 @@
       });
     </script>
   {% endcompress %}
-  {% compress js %}
-    {% block extrajs %}{% endblock %}
-  {% endcompress %}
+  {% block extrajs %}{% endblock %}
   {% block extrajstemplates %}{% endblock %}
+  <script>
+    var USER = {{ user_json|safe }};
+    _.extend(Backbone.Tastypie.apiKey, {
+      'username': '{{ user.username }}',
+      'key': '{{ user.api_key.key }}'
+    });
+  </script>
 
   {% if settings.GOOGLE_ANALYTICS_KEY %}
     <script>
