@@ -84,6 +84,11 @@
 
   {% compress js %}
     <script>
+      var API = {
+        'v1': {
+          'user': '{% api_dispatch_list api_name="v1",resource_name="user" %}'
+        }
+      };
       var APP = {};
       var IMG = {
         loading_small: '{% static "img/loading_small.gif" %}',
