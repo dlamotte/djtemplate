@@ -9,7 +9,7 @@
       g.template_cache = {};
     }
     if (! g.template_cache[idsuffix]) {
-      template_cache[idsuffix] = _.template(
+      g.template_cache[idsuffix] = _.template(
         document.getElementById('template-' + idsuffix).innerHTML
       );
     }
