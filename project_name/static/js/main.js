@@ -1,4 +1,6 @@
 (function($, window, undefined) {
+  'use strict';
+
   var g = APP.g = {};
   var models = APP.models = {};
   var utils = APP.utils = {};
