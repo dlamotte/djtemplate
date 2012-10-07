@@ -32,10 +32,6 @@ urlpatterns += patterns('django.views.generic.simple',
     }),
 )
 
-urlpatterns += patterns('',
-    url('^', include('{{ project_name }}.core.urls')),
-)
-
 # serve static files if proxy doesn't handle them
 urlpatterns += patterns('',
     url(r'^%s(?P<path>.*)$' % settings.MEDIA_URL[1:],
@@ -45,4 +41,8 @@ urlpatterns += patterns('',
     url(r'^%s(?P<path>.*)$' % settings.STATIC_URL[1:],
         'django.contrib.staticfiles.views.serve',
     ),
+)
+
+urlpatterns += patterns('',
+    url('^', include('{{ project_name }}.core.urls')),
 )
