@@ -40,6 +40,7 @@ urlpatterns += patterns('',
     ),
     url(r'^%s(?P<path>.*)$' % settings.STATIC_URL[1:],
         'django.contrib.staticfiles.views.serve',
+        dict(insecure=True),
     ),
 )
 
