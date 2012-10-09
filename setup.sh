@@ -15,11 +15,8 @@ django-admin.py startproject --template="$URL" "$projectname"
 echo "% cd $projectname"
 cd $projectname
 
-echo *-*-*
-echo *-*-* | read dir
-echo "dir: $dir"
-mv $dir/* .
-rmdir $dir
+mv *-*-*/* .
+rmdir *-*-*
 
 echo "% virtualenv env"
 virtualenv env
