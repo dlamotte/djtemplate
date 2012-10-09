@@ -82,7 +82,8 @@
 
   APP.Router = Backbone.Router.extend({
     routes: {
-      '': 'home'
+      '': 'home',
+      'account/login/': 'account_login'
     },
 
     initialize: function(el) {
@@ -102,7 +103,15 @@
       this.manager.html(utils.get_template('404')());
     },
 
+    account_login: function() {
+      this.manager.$el.find('input:first').focus();
+    },
+
     home: function() {
+      this.manager.html(utils.get_template('home')());
+    },
+
+    base: function() {
       this.manager.show(new views.Base());
     }
   });

@@ -1,46 +1,5 @@
 {% extends "base.html" %}
 {% load core %}
 
-{% block content %}
-<div class="row">
-  <div class="hero-unit">
-    <h1>{{ settings.PROJECT_NAME }}</h1>
-    <p>Tagline</p>
-    <p>
-      <a class="btn btn-primary btn-large">
-        Learn more
-      </a>
-    </p>
-  </div>
-</div>
-{% endblock %}
-
-{% block extrajs %}
-<script>
-$(function() {
-  var el = document.getElementById('content');
-  var $el = $(el);
-  APP.global.router = new APP.Router(el);
-  if (  ! Backbone.history.start({pushState: true})
-      && $el.children().length === 0) {
-    APP.global.router.do_404();
-  }
-});
-</script>
-{% endblock %}
-
 {% block extrajstemplates %}{% verbatim %}
-<script type="text/template" id="template-404">
-  <h1>404: Page not found</h1>
-  <p>
-    You may have hit this page for a few reasons:
-
-    <ul>
-      <li>The application does not handle the URL</li>
-      <li>The object you are trying to access does not exist</li>
-    </ul>
-
-    If you think this page should exist, please contact the administrator.
-  </p>
-</script>
 {% endverbatim %}{% endblock %}

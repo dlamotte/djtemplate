@@ -3,5 +3,5 @@ from {{ project_name }}.core.api import api
 
 urlpatterns = patterns('{{ project_name }}.core.views',
     url(r'^api/', include(api.urls)),
-    url(r'^$', 'home', name='home'),
+    url(r'^', 'home', name='home'),
 )
