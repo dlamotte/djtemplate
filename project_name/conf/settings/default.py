@@ -86,6 +86,7 @@ INSTALLED_APPS = (
     'compressor',
     'jsonfield',
     'raven.contrib.django',
+    'tastypie',
     'south',
 
     '{{ project_name }}.core',

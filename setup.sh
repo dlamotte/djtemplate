@@ -43,8 +43,11 @@ chmod u+x ./manage.py ./setup.py
 mv Procfile.py Procfile
 rm -f setup.sh
 
-echo "% ./manage.py syncdb"
-./manage.py syncdb
+echo "% ./manage.py syncdb --all"
+./manage.py syncdb --all
+
+echo "% ./manage.py migrate --fake"
+./manage.py migrate --fake
 
 echo ""
 echo "Enter virtual environment with:"
