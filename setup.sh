@@ -31,7 +31,7 @@ cat <<EOF > .gitignore
 /env/
 /$projectname/media/
 /settings_local.py
-/*.\.egg-info/
+/*.egg-info/
 EOF
 
 echo "% git init"
@@ -46,4 +46,4 @@ echo source env/bin/activate
 echo ./manage.py syncdb
 echo ./manage.py runserver
 
-rm -f $0
+rm -f setup.sh
