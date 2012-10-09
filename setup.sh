@@ -15,14 +15,16 @@ django-admin.py startproject --template="$URL" "$projectname"
 echo "% cd $projectname"
 cd $projectname
 
+# remove tarball top-level dir from github
 mv *-*-*/* .
 rmdir *-*-*
 
 echo "% virtualenv env"
 virtualenv env
+source env/bin/activate
 
-echo "% pip -E env install -e ."
-pip -E env install -e .
+echo "% pip install -e ."
+pip install -e .
 
 echo "% psql -c \"create database $projectname;\""
 psql -c "create database $projectname;"
@@ -39,11 +41,10 @@ git init
 
 chmod u+x ./manage.py ./setup.py
 mv Procfile.py Procfile
+rm -f setup.sh
 
 echo ""
 echo "You still need to do the following:"
 echo source env/bin/activate
 echo ./manage.py syncdb
 echo ./manage.py runserver
-
-rm -f setup.sh
