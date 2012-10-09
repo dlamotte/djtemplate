@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 install_requires = [
     'BeautifulSoup==3.2.1',
-    'Django==1.4,<1.5',
+    'Django>1.4,<1.5',
     'Fabric==1.4.2',
     'PIL==1.1.7',
     'South==0.7.6',
