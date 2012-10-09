@@ -2,6 +2,8 @@
 
 URL="https://github.com/dlamotte/djtemplate/tarball/master"
 
+echo "args: $@"
+
 echo -n 'Project name: '
 read projectname
 
