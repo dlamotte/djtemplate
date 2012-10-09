@@ -14,18 +14,4 @@ Complete with:
 
 To use:
 
-    django-admin.py startproject --template=https://github.com/dlamotte/djtemplate/tarball/master myprojectname
-    cd myprojectname
-    mv dlamotte-*/* .
-    rmdir dlamotte-*
-    virtualenv env
-    source env/bin/activate
-    pip install -e .
-    psql -c 'create database myprojectname;'
-    echo 'from myprojectname.conf.settings.dev import *' > settings_local.py
-    echo '/env/\nsettings_local.py' > .gitignore
-    git init
-    chmod 755 ./manage.py
-    chmod 755 ./setup.py
-    ./manage.py syncdb
-    ./manage.py runserver
+    curl https://raw.github.com/dlamotte/djtemplate/master/setup.sh | sh
