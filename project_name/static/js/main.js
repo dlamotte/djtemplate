@@ -1,7 +1,7 @@
 (function($, window, undefined) {
   'use strict';
 
-  var g = APP.g = {};
+  var g = APP.global = {};
   var collections = APP.collections = {};
   var models = APP.models = {};
   var utils = APP.utils = {};
@@ -11,17 +11,32 @@
     this.el = el;
     this.$el = $(el);
     this.current = null;
+
+    this.on('change', this.onchange, this);
   };
-  utils.ViewManager.prototype.show = function(view) {
-    if (this.current && this.current.close) {
-      this.current.close();
+  _.extend(utils.ViewManager.prototype, Backbone.Events, {
+    onchange: function() {
+      if (this.current && this.current.close) {
+        this.current.close();
+      }
+    },
+
+    html: function(obj) {
+      this.trigger('change');
+
+      this.current = null;
+      this.$el.html(obj);
+    },
+
+    show: function(view) {
+      this.trigger('change');
+
+      this.current = view;
+      this.current.render();
+
+      this.$el.html(this.current.el);
     }
-
-    this.current = view;
-    this.current.render();
-
-    this.$el.html(this.current.el);
-  };
+  });
 
   utils.get_template = function(idsuffix) {
     if (! g.template_cache) {
@@ -70,8 +85,8 @@
       '': 'home'
     },
 
-    initialize: function() {
-      this.manager = new utils.ViewManager(document.getElementById('content'));
+    initialize: function(el) {
+      this.manager = new utils.ViewManager(el);
     },
 
     navigate_trigger: function() {
@@ -81,6 +96,10 @@
       opts.trigger = true;
       args[1] = opts;
       Backbone.Router.prototype.navigate.apply(this, args);
+    },
+
+    do_404: function() {
+      this.manager.html(utils.get_template('404')());
     },
 
     home: function() {
