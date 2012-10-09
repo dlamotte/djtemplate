@@ -43,8 +43,9 @@ chmod u+x ./manage.py ./setup.py
 mv Procfile.py Procfile
 rm -f setup.sh
 
+echo "% ./manage.py syncdb"
+./manage.py syncdb
+
 echo ""
-echo "You still need to do the following:"
+echo "Enter virtual environment with:"
 echo source env/bin/activate
-echo ./manage.py syncdb
-echo ./manage.py runserver
