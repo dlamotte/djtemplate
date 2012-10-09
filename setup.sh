@@ -2,10 +2,7 @@
 
 URL="https://github.com/dlamotte/djtemplate/tarball/master"
 
-echo "args: $@"
-
-echo -n 'Project name: '
-read projectname
+projectname="$1"
 
 if [[ -z $projectname ]]; then
     echo "no project name, giving up..."

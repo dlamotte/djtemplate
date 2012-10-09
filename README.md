@@ -14,4 +14,4 @@ Complete with:
 
 To use:
 
-    curl https://raw.github.com/dlamotte/djtemplate/master/setup.sh | sh
+    curl https://raw.github.com/dlamotte/djtemplate/master/setup.sh | sh -s projectname
