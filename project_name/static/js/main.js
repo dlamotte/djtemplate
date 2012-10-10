@@ -93,7 +93,7 @@
 
     nav_select: function(className) {
       this.$nav.find('li.active').removeClass('active');
-      this.$nav.find('li .' + className).addClass('active');
+      this.$nav.find('li .' + className).parent().addClass('active');
     },
 
     navigate_trigger: function() {
