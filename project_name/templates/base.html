@@ -125,17 +125,17 @@
           publish: function(obj, keypath, value) {
             obj.set(keypath, value);
           }
+        }
+      });
+      _.extend(rivets.formatters, {
+        date: function(value) {
+          return moment(value).format('YYYY-MM-DD');
         },
-        formatters: {
-          date: function(value) {
-            return moment(value).format('YYYY-MM-DD');
-          },
-          datetime: function(value) {
-            return moment(value).format('YYYY-MM-DD HH:mm:ss');
-          },
-          money: function(value) {
-            return '$' + value;
-          }
+        datetime: function(value) {
+          return moment(value).format('YYYY-MM-DD HH:mm:ss');
+        },
+        money: function(value) {
+          return '$' + value;
         }
       });
 
