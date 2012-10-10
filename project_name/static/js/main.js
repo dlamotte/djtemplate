@@ -83,7 +83,7 @@
   APP.Router = Backbone.Router.extend({
     routes: {
       '': 'home',
-      'account/login/': 'account_login'
+      'account/login/*extra': 'account_login'
     },
 
     initialize: function(el) {
