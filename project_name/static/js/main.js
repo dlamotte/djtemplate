@@ -87,7 +87,13 @@
     },
 
     initialize: function(el) {
+      this.$nav.find('li.active').removeClass('active');
       this.manager = new utils.ViewManager(el);
+    },
+
+    nav_select: function(className) {
+      this.$nav.find('li.active').removeClass('active');
+      this.$nav.find('li .' + className).addClass('active');
     },
 
     navigate_trigger: function() {
