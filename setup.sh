@@ -1,5 +1,7 @@
 #!/bin/sh
 
+trap 'echo "caught error: exiting..."; exit 1' ERR
+
 URL="https://github.com/dlamotte/djtemplate/tarball/master"
 
 projectname="$1"
