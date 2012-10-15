@@ -1,9 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Internal Server Error</title>
 </head>
 <body>
   <h1>Internal Server Error</h1>
+  <p>
+    {% if request.sentry.id %}
+      Logged error message ID: {{ request.sentry.id }}
+      <br />
+      Please use the above message ID when referencing this issue.
+    {% else %}
+      An email was sent about this issue...
+    {% endif %}
+  </p>
 </body>
 </html>
