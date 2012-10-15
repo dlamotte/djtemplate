@@ -23,6 +23,10 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', '{{ project_name }}.settings')
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
+# ensure fundamental issues are even caught
+from raven.contrib.django.middleware.wsgi import Sentry
+application = Sentry(application)
+
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
 # application = HelloWorldApplication(application)
