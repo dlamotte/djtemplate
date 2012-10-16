@@ -26,7 +26,7 @@ TEMPLATE_DEBUG = DEBUG = True
 ADMINS = MANAGERS = ()
 COMPRESS_OFFLINE = True
 COMPRESS_OFFLINE_MANIFEST = 'manifest1.json'
-COMPRESS_OUTPUT_DIR = 'cache'
+COMPRESS_OUTPUT_DIR = ''
 LANGUAGE_CODE = 'en-us'
 LOGIN_URL = reverse_lazy('django.contrib.auth.views.login')
 LOGIN_REDIRECT_URL = reverse_lazy('home')
