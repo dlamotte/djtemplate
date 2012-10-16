@@ -1,5 +1,6 @@
 from django.db.models import get_model
 from tastypie.api import Api
+from tastypie.http import HttpUnauthorized
 from tastypie.resources import ModelResource
 
 # minor improvements on ApiKeyAuthentication from tastypie to allow for
