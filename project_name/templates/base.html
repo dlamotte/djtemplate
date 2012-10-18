@@ -16,7 +16,7 @@
   <link rel="author" href="/humans.txt">
 
   {% compress css %}
-    <link rel="stylesheet" type="text/less" href="{% static "less/main.less" %}">
+    <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/main.less">
   {% endcompress %}
   {% block extracss %}{% endblock %}
 
@@ -28,7 +28,7 @@
   <![endif]-->
 
   {% compress js %}
-    <script src="{% static "js/modernizr.js" %}"></script>
+    <script src="{{ STATIC_URL }}js/modernizr.js"></script>
   {% endcompress %}
 </head>
 <body>
@@ -90,23 +90,23 @@
       };
       var APP = {};
       var IMG = {
-        loading_small: '{% static "img/loading_small.gif" %}',
-        loading_large: '{% static "img/loading_large.gif" %}'
+        loading_small: '{{ STATIC_URL }}img/loading_small.gif',
+        loading_large: '{{ STATIC_URL }}img/loading_large.gif'
       };
     </script>
-    <script src="{% static "js/json2.js" %}"></script>
-    <script src="{% static "js/es5-shim.js" %}"></script>
-    <script src="{% static "js/jquery.js" %}"></script>
-    <script src="{% static "js/underscore.js" %}"></script>
-    <script src="{% static "js/underscore.string.js" %}"></script>
-    <script src="{% static "js/backbone.js" %}"></script>
-    <script src="{% static "js/backbone-tastypie.js" %}"></script>
-    <script src="{% static "js/backbone-relational.js" %}"></script>
-    <script src="{% static "js/laconic.js" %}"></script>
-    <script src="{% static "js/moment.js" %}"></script>
-    <script src="{% static "js/rivets.js" %}"></script>
-    <script src="{% static "js/bootstrap.js" %}"></script>
-    <script src="{% static "js/main.js" %}"></script>
+    <script src="{{ STATIC_URL }}js/json2.js"></script>
+    <script src="{{ STATIC_URL }}js/es5-shim.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script src="{{ STATIC_URL }}js/underscore.js"></script>
+    <script src="{{ STATIC_URL }}js/underscore.string.js"></script>
+    <script src="{{ STATIC_URL }}js/backbone.js"></script>
+    <script src="{{ STATIC_URL }}js/backbone-tastypie.js"></script>
+    <script src="{{ STATIC_URL }}js/backbone-relational.js"></script>
+    <script src="{{ STATIC_URL }}js/laconic.js"></script>
+    <script src="{{ STATIC_URL }}js/moment.js"></script>
+    <script src="{{ STATIC_URL }}js/rivets.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+    <script src="{{ STATIC_URL }}js/main.js"></script>
     <script>
       jQuery.ajaxSettings.traditional = true;
       _.mixin(_.str.exports());
