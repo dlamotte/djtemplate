@@ -1,5 +1,5 @@
 from django.conf import settings
-from {{ project_name }}.core.api import UserResource
+from {{ project_name }}.core.apiv1 import UserResource
 
 def default(request):
     user = 'null'
