@@ -13,7 +13,7 @@ class UserResource(ModelResource):
         always_return_data = True
         authentication = ApiKeyAuthentication()
         authorization = DjangoAuthorization()
-        exclude = ('password', )
+        excludes = ('password', )
         filtering = {
             'username': ALL,
             'first_name': ALL,
