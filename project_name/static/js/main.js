@@ -88,6 +88,7 @@
 
     initialize: function(el) {
       this.$nav.find('li.active').removeClass('active');
+      this.history = Backbone.history;
       this.manager = new utils.ViewManager(el);
     },
 
@@ -96,13 +97,28 @@
       this.$nav.find('li .' + className).parent().addClass('active');
     },
 
-    navigate_trigger: function() {
-      var args = _.toArray(arguments);
-      var opts = args[1];
+    navigate: function(fragment, opts) {
+      var root = this.history.root;
+      if (root !== '/') {
+        if (root === fragment.substr(0, root.length)) {
+          fragment = fragment.substr(root.length);
+        }
+        else if (root.substr(0, 1) === '/'
+                 && root.substr(1) === fragment.substr(0, root.length - 1)) {
+          fragment = fragment.substr(root.length - 1);
+        }
+      }
+      return Backbone.Router.prototype.navigate.call(this, fragment, opts);
+    },
+
+    navigate_query: function(fragment, opts) {,
+      return this.navigate(this.history.getFragment() + query, opts);
+    },
+
+    navigate_trigger: function(fragment, opts) {
       opts || (opts = {});
       opts.trigger = true;
-      args[1] = opts;
-      Backbone.Router.prototype.navigate.apply(this, args);
+      return this.navigate(fragment, opts);
     },
 
     do_404: function() {
