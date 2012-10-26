@@ -87,9 +87,28 @@
     },
 
     initialize: function(el) {
+      this._first_popstate = true;
       this.$nav.find('li.active').removeClass('active');
       this.history = Backbone.history;
       this.manager = new utils.ViewManager(el);
+      this.search = window.location.search;
+
+      _.bindAll(this, 'check_search');
+      $(window).on('popstate', this.check_search);
+    },
+
+    check_search: function() {
+      var search = this.search;
+      this.search = window.location.search;
+
+      if (this._first_popstate === true) {
+        this._first_popstate = false;
+        return;
+      }
+
+      if (search !== window.location.search) {
+        this.history.loadUrl() || this.history.loadUrl(this.history.getHash());
+      }
     },
 
     nav_select: function(className) {
