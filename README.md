@@ -1,6 +1,8 @@
 djtemplate
 ==========
 
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 A very opinionated template for a django project.
 
 Complete with:
